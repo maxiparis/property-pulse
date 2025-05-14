@@ -7,9 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      fontFamily: {
+        sans: ['Popins', 'sans-serif'],
+      },
+      gridTemplateColumns: {
+        '70/30': '70% 28%'
       },
     },
   },
