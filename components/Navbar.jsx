@@ -1,3 +1,6 @@
+'use client';
+
+import {useState} from "react";
 import Image from 'next/image'
 import Link from 'next/link'
 import logo from '@/assets/images/logo-white.png'
@@ -5,6 +8,10 @@ import profileDefault from '@/assets/images/profile.png'
 import { FaGoogle } from 'react-icons/fa'
 
 export default function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
+
+
   return (
     <nav className="bg-blue-700 border-b border-blue-500">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -17,6 +24,7 @@ export default function Navbar() {
               className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
               aria-expanded="false"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <span className="absolute -inset-0.5"></span>
               <span className="sr-only">Open main menu</span>
@@ -128,6 +136,7 @@ export default function Navbar() {
                   id="user-menu-button"
                   aria-expanded="false"
                   aria-haspopup="true"
+                  onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
                 >
                   <span className="absolute -inset-1.5"></span>
                   <span className="sr-only">Open user menu</span>
@@ -140,50 +149,53 @@ export default function Navbar() {
               </div>
 
               {/*// <!-- Profile dropdown -->*/}
-              <div
-                id="user-menu"
-                className="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="user-menu-button"
-                tabIndex="-1"
-              >
-                <Link
-                  href="/profile"
-                  className="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
+              {isProfileMenuOpen && (
+                <div
+                  id="user-menu"
+                  className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="user-menu-button"
                   tabIndex="-1"
-                  id="user-menu-item-0"
                 >
-                  Your Profile
-                </Link>
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-2 text-sm text-gray-700"
+                    role="menuitem"
+                    tabIndex="-1"
+                    id="user-menu-item-0"
+                  >
+                    Your Profile
+                  </Link>
 
-                <Link
-                  href="/properties/saved"
-                  className="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabIndex="-1"
-                  id="user-menu-item-2"
-                >
-                  Saved Properties
-                </Link>
+                  <Link
+                    href="/properties/saved"
+                    className="block px-4 py-2 text-sm text-gray-700"
+                    role="menuitem"
+                    tabIndex="-1"
+                    id="user-menu-item-2"
+                  >
+                    Saved Properties
+                  </Link>
 
-                <button
-                  className="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabIndex="-1"
-                  id="user-menu-item-2"
-                >
-                  Sign Out
-                </button>
-              </div>
+                  <button
+                    className="block px-4 py-2 text-sm text-gray-700"
+                    role="menuitem"
+                    tabIndex="-1"
+                    id="user-menu-item-2"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+                )
+              }
             </div>
           </div>
         </div>
       </div>
 
       {/*// <!-- Mobile menu, show/hide based on menu state. -->*/}
-      <div className="hidden" id="mobile-menu">
+      {isMobileMenuOpen && <div id="mobile-menu">
         <div className="space-y-1 px-2 pb-3 pt-2">
           <Link
             href="/"
@@ -212,7 +224,7 @@ export default function Navbar() {
             <span>Login or Register</span>
           </button>
         </div>
-      </div>
+      </div>}
     </nav>
 
   )
