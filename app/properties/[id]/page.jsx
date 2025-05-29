@@ -3,6 +3,7 @@ import Property from "@/models/Property";
 import PropertyHeaderImage from "@/components/PropertyHeaderImage";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
+import PropertyDetails from "@/components/PropertyDetails";
 
 export default async function PropertyPage({params, searchParams}) {
   await connectDB();
@@ -25,6 +26,7 @@ export default async function PropertyPage({params, searchParams}) {
         <div className="container m-auto py-10 px-6">
           <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
             {/*  Property Info */}
+            <PropertyDetails property={property}/>
           </div>
         </div>
       </section>
