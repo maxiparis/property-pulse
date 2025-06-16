@@ -21,6 +21,7 @@ export const authOptions = {
       // 2. Check if user exists
       // 3. If not, then create user
       // 4. Return true to allow sign in
+      return true
     },
     // Session callback function that modifies the session object
     async session({session}) {
